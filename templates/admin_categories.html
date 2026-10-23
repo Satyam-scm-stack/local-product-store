@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Categories | LocalStore{% endblock %}
+{% block content %}
+<h1 class="h2 fw-bold mb-4">Manage categories</h1>
+<div class="row g-4"><div class="col-md-5"><form class="card p-4" method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><label class="form-label">New category name</label><input class="form-control" name="name" maxlength="100" required placeholder="e.g. Kitchen Appliances"><button class="btn btn-primary mt-3">Add category</button></form></div>
+<div class="col-md-7"><div class="card p-3"><ul class="list-group list-group-flush">{% for c in categories %}<li class="list-group-item d-flex justify-content-between"><span>{{ c.name }}</span><span class="text-secondary small">{{ c.products|length }} product(s)</span></li>{% else %}<li class="list-group-item text-secondary">No categories yet.</li>{% endfor %}</ul></div></div></div>
+{% endblock %}

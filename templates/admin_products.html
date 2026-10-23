@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Manage products | LocalStore{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4"><h1 class="h2 fw-bold">Manage products</h1><a class="btn btn-primary" href="{{ url_for('edit_product') }}">+ Add product</a></div>
+<div class="card p-3">
+<div class="table-responsive"><table class="table align-middle"><thead><tr><th>Product</th><th>Category</th><th>MRP</th><th>Selling price</th><th>Status</th><th></th></tr></thead><tbody>
+{% for p in products %}
+<tr><td><strong>{{ p.name }}</strong></td><td>{{ p.category.name }}</td><td>₹{{ '%.2f'|format(p.mrp) }}</td><td>₹{{ '%.2f'|format(p.selling_price) }}</td><td>{{ 'Active' if p.is_active else 'Inactive' }}</td><td><a class="btn btn-sm btn-outline-primary" href="{{ url_for('edit_product', product_id=p.id) }}">Edit</a></td></tr>
+{% else %}<tr><td colspan="6" class="text-secondary">No products yet.</td></tr>{% endfor %}
+</tbody></table></div></div>
+{% endblock %}

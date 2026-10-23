@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Edit' if product.id else 'Add' }} product | LocalStore{% endblock %}
+{% block content %}
+<div class="row justify-content-center"><div class="col-lg-9">
+<a href="{{ url_for('admin_products') }}" class="text-decoration-none">&larr; Back to products</a>
+<h1 class="h2 fw-bold mt-3 mb-4">{{ 'Edit product' if product.id else 'Add a product' }}</h1>
+{% if not categories %}<div class="alert alert-warning">Create a category first, then add products. <a href="{{ url_for('admin_categories') }}">Manage categories</a>.</div>{% endif %}
+<form class="card p-4" method="post" enctype="multipart/form-data">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<label class="form-label">Product name *</label><input class="form-control" name="name" maxlength="180" required value="{{ product.name or '' }}">
+<label class="form-label mt-3">Category *</label><select class="form-select" name="category_id" required><option value="">Choose category</option>{% for c in categories %}<option value="{{ c.id }}" {% if product.category_id == c.id %}selected{% endif %}>{{ c.name }}</option>{% endfor %}</select>
+<label class="form-label mt-3">Description</label><textarea class="form-control" name="description" rows="3">{{ product.description or '' }}</textarea>
+<label class="form-label mt-3">Specifications (one per line)</label><textarea class="form-control" name="specifications" rows="4" placeholder="Brand: Example&#10;Warranty: 1 year">{{ product.specifications or '' }}</textarea>
+<div class="row g-3 mt-1"><div class="col-md-6"><label class="form-label">MRP (₹) *</label><input class="form-control" type="number" name="mrp" min="0.01" step="0.01" required value="{{ product.mrp or '' }}"></div><div class="col-md-6"><label class="form-label">Selling price (₹) *</label><input class="form-control" type="number" name="selling_price" min="0" step="0.01" required value="{{ product.selling_price or '' }}"></div></div>
+<label class="form-label mt-3">Product image (PNG, JPG, WEBP or GIF; max 5 MB)</label><input class="form-control" type="file" name="image" accept=".png,.jpg,.jpeg,.webp,.gif">
+{% if product.image_filename %}<p class="small text-secondary mt-2">Current image: {{ product.image_filename }}</p>{% endif %}
+<div class="form-check mt-4"><input class="form-check-input" type="checkbox" id="is_active" name="is_active" {% if product.id is none or product.is_active %}checked{% endif %}><label class="form-check-label" for="is_active">Visible in customer storefront</label></div>
+<button class="btn btn-primary btn-lg mt-4 align-self-start" {% if not categories %}disabled{% endif %}>Save product</button>
+</form></div></div>
+{% endblock %}

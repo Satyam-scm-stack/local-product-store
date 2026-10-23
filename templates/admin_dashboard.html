@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Admin | LocalStore{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+  <div><span class="eyebrow">STORE MANAGEMENT</span><h1 class="display-6 fw-bold mt-1">Admin dashboard</h1></div>
+  <a class="btn btn-primary" href="{{ url_for('edit_product') }}">+ Add product</a>
+</div>
+<div class="row g-3 mb-4">
+  <div class="col-md-4"><div class="stat-card"><span>Products</span><strong>{{ product_count }}</strong><a href="{{ url_for('admin_products') }}">Manage products →</a></div></div>
+  <div class="col-md-4"><div class="stat-card"><span>Categories</span><strong>{{ category_count }}</strong><a href="{{ url_for('admin_categories') }}">Manage categories →</a></div></div>
+  <div class="col-md-4"><div class="stat-card"><span>Open queries</span><strong>{{ query_count }}</strong><a href="{{ url_for('admin_queries') }}">Review customer queries →</a></div></div>
+</div>
+<div class="card p-3 p-md-4">
+  <h2 class="h5 mb-3">Recent customer queries</h2>
+  {% if recent_queries %}
+  <div class="table-responsive"><table class="table align-middle"><thead><tr><th>Customer</th><th>Message</th><th>Status</th><th>Date</th></tr></thead><tbody>
+  {% for q in recent_queries %}<tr><td>{{ q.name }}<div class="small text-secondary">{{ q.email }}</div></td><td>{{ q.message|truncate(100) }}</td><td><span class="badge text-bg-light">{{ q.status }}</span></td><td class="small">{{ q.created_at.strftime('%d %b %Y') }}</td></tr>{% endfor %}
+  </tbody></table></div>
+  {% else %}<p class="text-secondary mb-0">No customer queries yet.</p>{% endif %}
+</div>
+{% endblock %}

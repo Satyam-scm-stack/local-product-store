@@ -1,0 +1,28 @@
+:root { --ink:#17202a; --blue:#3157d5; --soft:#f4f6fb; --line:#e7eaf1; }
+body { background:#fbfcfe; color:var(--ink); min-height:100vh; }
+.store-nav { background:#17202a; }
+.navbar-brand { letter-spacing:-.04em; }
+.hero { border-radius:24px; background:linear-gradient(120deg,#e7edff,#f6f8ff 60%,#e6f7f4); }
+.eyebrow { font-size:.72rem; letter-spacing:.15em; font-weight:800; color:var(--blue); }
+.btn-primary { background:var(--blue); border-color:var(--blue); }
+.btn-primary:hover { background:#2546b3; border-color:#2546b3; }
+.product-card { border:1px solid var(--line); border-radius:18px; overflow:hidden; transition:transform .15s,box-shadow .15s; }
+.product-card:hover { transform:translateY(-3px); box-shadow:0 12px 30px #17202a12; }
+.product-image { height:210px; width:100%; object-fit:cover; background:#f1f3f8; }
+.product-placeholder { height:210px; display:grid; place-items:center; background:linear-gradient(135deg,#e7edff,#f2f4f8); color:#3157d5; font-size:4rem; font-weight:800; }
+.price-line { display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+.price-line strong { font-size:1.25rem; }
+.discount { display:inline-block; background:#e3f8eb; color:#167445; font-size:.75rem; font-weight:800; padding:4px 8px; border-radius:7px; }
+.detail-image,.detail-placeholder { width:100%; max-height:480px; object-fit:contain; border-radius:20px; background:#f1f3f8; }
+.detail-placeholder { min-height:320px; display:grid; place-items:center; font-size:8rem; font-weight:800; color:var(--blue); }
+.spec-box { white-space:pre-line; background:white; border:1px solid var(--line); border-radius:12px; padding:18px; line-height:1.8; }
+.auth-wrap { min-height:65vh; display:grid; place-items:center; }
+.auth-card { width:100%; max-width:480px; border:1px solid var(--line); border-radius:20px; box-shadow:0 18px 50px #17202a0a; }
+.stat-card { background:white; border:1px solid var(--line); border-radius:16px; padding:22px; display:flex; flex-direction:column; gap:8px; }
+.stat-card span { color:#657080; }
+.stat-card strong { font-size:2.4rem; line-height:1.2; }
+.stat-card a { text-decoration:none; font-weight:600; margin-top:4px; }
+.card { border-color:var(--line); border-radius:16px; }
+.empty-state { padding:64px 20px; text-align:center; background:white; border:1px dashed #cbd2df; border-radius:18px; }
+.query-message { min-width:220px; max-width:380px; white-space:pre-wrap; }
+footer { border-top:1px solid var(--line); margin-top:48px; }

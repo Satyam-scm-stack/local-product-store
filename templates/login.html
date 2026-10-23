@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Log in | LocalStore{% endblock %}
+{% block content %}
+<div class="auth-wrap">
+  <div class="card auth-card">
+    <div class="card-body p-4 p-md-5">
+      <span class="eyebrow">ACCOUNT ACCESS</span>
+      <h1 class="h2 fw-bold mt-2">Welcome back</h1>
+      <p class="text-secondary">Sign in with your username and password.</p>
+      <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <label class="form-label mt-3">Username</label>
+        <input class="form-control form-control-lg" name="username" required autocomplete="username">
+        <label class="form-label mt-3">Password</label>
+        <input class="form-control form-control-lg" type="password" name="password" required autocomplete="current-password">
+        <button class="btn btn-primary btn-lg w-100 mt-4">Log in</button>
+      </form>
+      <p class="small text-secondary mt-3 mb-0">Admin accounts are created from the local command line. No default password is set.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

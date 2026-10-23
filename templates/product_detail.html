@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} | LocalStore{% endblock %}
+{% block content %}
+<a href="{{ url_for('index') }}" class="text-decoration-none">&larr; Back to products</a>
+<div class="row g-5 mt-1">
+  <div class="col-md-5">
+    {% if product.image_filename %}
+      <img class="detail-image" src="{{ url_for('static', filename='uploads/' + product.image_filename) }}" alt="{{ product.name }}">
+    {% else %}
+      <div class="detail-placeholder">{{ product.name[:1]|upper }}</div>
+    {% endif %}
+  </div>
+  <div class="col-md-7">
+    <span class="badge text-bg-light">{{ product.category.name }}</span>
+    <h1 class="display-6 fw-bold mt-3">{{ product.name }}</h1>
+    <p class="text-secondary">{{ product.description }}</p>
+    <div class="my-4"><span class="display-6 fw-bold">₹{{ '%.2f'|format(product.selling_price) }}</span>
+      <del class="text-secondary ms-2">₹{{ '%.2f'|format(product.mrp) }}</del>
+      {% if product.discount_percent %}<span class="discount ms-2">{{ product.discount_percent }}% OFF</span>{% endif %}
+    </div>
+    <h2 class="h5">Specifications</h2>
+    <div class="spec-box">{{ product.specifications or 'Specifications will be added soon.' }}</div>
+    <a class="btn btn-primary btn-lg mt-4" href="{{ url_for('suggestion', product_id=product.id) }}">Ask about this product</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Customer queries | LocalStore{% endblock %}
+{% block content %}
+<h1 class="h2 fw-bold mb-4">Customer queries</h1>
+<div class="card p-3"><div class="table-responsive"><table class="table align-middle"><thead><tr><th>Received</th><th>Customer</th><th>Product</th><th>Message</th><th>Status</th><th>Update</th></tr></thead><tbody>
+{% for q in queries %}
+<tr><td class="small">{{ q.created_at.strftime('%d %b %Y %H:%M') }}</td><td>{{ q.name }}<div class="small text-secondary">{{ q.email }}</div></td><td>{{ q.product.name if q.product else 'General' }}</td><td class="query-message">{{ q.message }}</td><td><span class="badge text-bg-light">{{ q.status }}</span></td><td><form method="post" action="{{ url_for('update_query_status', query_id=q.id) }}" class="d-flex gap-2"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><select class="form-select form-select-sm" name="status">{% for s in ['Open','In progress','Resolved'] %}<option {% if q.status == s %}selected{% endif %}>{{ s }}</option>{% endfor %}</select><button class="btn btn-sm btn-outline-primary">Save</button></form></td></tr>
+{% else %}<tr><td colspan="6" class="text-secondary">No queries received yet.</td></tr>{% endfor %}
+</tbody></table></div></div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Queries & Suggestions | LocalStore{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <span class="eyebrow">WE'RE LISTENING</span>
+    <h1 class="display-6 fw-bold mt-2">Queries & suggestions</h1>
+    <p class="text-secondary">Ask about a product or tell us what you'd like to see. Your message is saved to the store database.</p>
+    <form class="card p-4 p-md-5 mt-4" method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="product_id" value="{{ product.id if product else '' }}">
+      {% if product %}<div class="alert alert-light">Regarding: <strong>{{ product.name }}</strong></div>{% endif %}
+      <label class="form-label">Your name *</label><input class="form-control" name="name" maxlength="120" required>
+      <label class="form-label mt-3">Email (optional)</label><input class="form-control" name="email" type="email" maxlength="160">
+      <label class="form-label mt-3">Message *</label><textarea class="form-control" name="message" rows="5" maxlength="5000" required placeholder="What would you like to know or suggest?"></textarea>
+      <button class="btn btn-primary btn-lg mt-4 align-self-start">Submit message</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
